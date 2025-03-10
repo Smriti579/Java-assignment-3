@@ -1,11 +1,13 @@
 class BankAccount {
     private int balance = 1000;
-    public synchronized void withdraw(int amount) {
-        if (balance >= amount) {
-            balance -= amount;
-            System.out.println("Withdrawn: " + amount + ", Remaining balance: " + balance);
-        } else {
-            System.out.println("Insufficient balance");
+    public void withdraw(int amount) {
+        synchronized (this) {
+            if (balance >= amount) {
+                balance -= amount;
+                System.out.println("Withdrawn: " + amount + ", Remaining balance: " + balance);
+            } else {
+                System.out.println("Insufficient balance");
+            }
         }
     }
 }
